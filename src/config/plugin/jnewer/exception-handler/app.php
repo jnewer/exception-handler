@@ -1,8 +1,9 @@
 <?php
 
+use support\exception\BusinessException;
 use Illuminate\Validation\ValidationException;
-use Jnewer\ExceptionHandler\Exception\HttpException;
-use Jnewer\ExceptionHandler\HttpExceptionHandler;
+use Jnewer\ExceptionHandler\BaseExceptionHandler;
+use Jnewer\ExceptionHandler\Exception\BaseException;
 use Jnewer\ExceptionHandler\ValidationExceptionHandler;
 
 return [
@@ -10,7 +11,12 @@ return [
     'exception' => [
         'handlers' => [
             ValidationException::class => ValidationExceptionHandler::class,
-            HttpException::class => HttpExceptionHandler::class
+            BaseException::class => BaseExceptionHandler::class
         ]
+    ],
+    'dont_report' => [
+        BusinessException::class,
+        BaseException::class,
+        ValidationException::class,
     ]
 ];

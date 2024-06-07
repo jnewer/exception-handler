@@ -8,6 +8,13 @@ use Webman\Http\Response;
 use support\exception\Handler as ExceptionHandler;
 
 class Handler extends ExceptionHandler{
+    public $dontReport = [];
+
+    public function report(Throwable $exception)
+    {
+        $this->dontReport = config('plugin.jnewer.exception-handler.app.exception.dont_report', []);
+        parent::report($exception);
+    }
     public function getExceptionHandlers()
     {
         return config('plugin.jnewer.exception-handler.app.exception.handlers', []);

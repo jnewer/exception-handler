@@ -1,9 +1,13 @@
 <?php
+
 namespace Jnewer\ExceptionHandler\Exception;
+
 use Webman\Http\Request;
 use Webman\Http\Response;
+use Exception;
 
-class HttpException extends \Exception{
+class HttpException extends BaseException
+{
     /**
      * @var int HTTP status code, such as 403, 404, 500, etc.
      */
@@ -19,27 +23,10 @@ class HttpException extends \Exception{
     public function __construct($statusCode, $message = null, $code = 0, \Exception $previous = null)
     {
         $this->statusCode = $statusCode;
-        if(!$message){
+        if (!$message) {
             $message = Response::$_phrases[$statusCode] ?? '';
         }
-        
+
         parent::__construct($message, $code, $previous);
     }
-
-    public function render(Request $request, \Throwable $exception): Response
-    {
-        /** @var ValidationException $exception */
-        $message = $exception->validator->errors()->first();
-        if (!$request->expectsJson()) {
-            return new Response($exception->statusCode, [], $message);
-        }
-
-        $jsonMessage = ['code' => $exception->code ?: $exception->statusCode, 'message' => $message, 'success' => false, 'data' => []];
-        return new Response(
-            $exception->statusCode,
-            ['Content-Type' => 'application/json'],
-            json_encode($jsonMessage, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-        );
-    }
-
 }
