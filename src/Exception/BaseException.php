@@ -5,7 +5,6 @@ namespace Jnewer\ExceptionHandler\Exception;
 use Webman\Http\Request;
 use Webman\Http\Response;
 use Exception;
-use stdClass;
 use Throwable;
 
 class BaseException extends Exception

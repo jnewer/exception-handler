@@ -39,6 +39,11 @@ return [
         'handlers' => [
             ValidationException::class => ValidationExceptionHandler::class,
             HttpException::class => HttpExceptionHandler::class
+        ],
+        'dont_report' => [
+            BusinessException::class,
+            BaseException::class,
+            ValidationException::class,
         ]
     ]
 ];
