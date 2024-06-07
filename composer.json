@@ -1,0 +1,13 @@
+{
+  "name": "jnewer/exception-handler",
+  "type": "library",
+  "license": "MIT",
+  "description": "Webman plugin jnewer/exception-handler",
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Jnewer\\ExceptionHandler\\": "src"
+    }
+  }
+}
