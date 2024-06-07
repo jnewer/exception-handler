@@ -4,10 +4,19 @@
   "license": "MIT",
   "description": "Webman plugin jnewer/exception-handler",
   "require": {
+    "php": ">=7.4",
+    "ext-json": "*",
+    "illuminate/validation": ">=8.0",
+    "workerman/webman-framework": "^1.5"
   },
   "autoload": {
     "psr-4": {
       "Jnewer\\ExceptionHandler\\": "src"
     }
+  },
+  "require-dev": {
+    "illuminate/database": ">=8.0",
+    "webman-tech/laravel-translation": "^1.0",
+    "workerman/webman": "^1.0"
   }
 }
