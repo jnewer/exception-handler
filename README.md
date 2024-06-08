@@ -28,8 +28,8 @@ return [
 ```php
 
 use Illuminate\Validation\ValidationException;
-use Jnewer\ExceptionHandler\Exception\HttpException;
-use Jnewer\ExceptionHandler\HttpExceptionHandler;
+use Jnewer\ExceptionHandler\Exception\BaseException;
+use Jnewer\ExceptionHandler\BaseExceptionHandler;
 use Jnewer\ExceptionHandler\ValidationExceptionHandler;
 
 return [
@@ -38,7 +38,7 @@ return [
         // 这里配置异常类和对应的处理类
         'handlers' => [
             ValidationException::class => ValidationExceptionHandler::class,
-            HttpException::class => HttpExceptionHandler::class
+            BaseException::class => BaseExceptionHandler::class
         ],
         'dont_report' => [
             BusinessException::class,
