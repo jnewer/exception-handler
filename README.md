@@ -53,8 +53,6 @@ return [
 
 ## 基本用法
 
-请求参数错误
-
 ```php
 use support\Request;
 use support\Response;
