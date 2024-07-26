@@ -19,11 +19,15 @@ class ValidationExceptionHandler extends Handler
             return new Response($exception->status, [], $message);
         }
 
-        $jsonMessage = ['code' => $exception->status, 'message' => $message, 'success' => false, 'data' => []];
         return new Response(
             $exception->status,
             ['Content-Type' => 'application/json'],
-            json_encode($jsonMessage, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+            json_encode([
+                'code' => $exception->status,
+                'message' => $message,
+                'success' => false,
+                'data' => []
+            ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         );
     }
 }

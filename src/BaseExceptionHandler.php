@@ -17,11 +17,15 @@ class BaseExceptionHandler extends Handler
             return new Response($exception->statusCode, [], $message);
         }
 
-        $jsonMessage = ['code' => $exception->code ?: $exception->statusCode, 'message' => $message, 'success' => false, 'data' => []];
         return new Response(
             $exception->statusCode,
             ['Content-Type' => 'application/json'],
-            json_encode($jsonMessage, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+            json_encode([
+                'code' => $exception->code ?: $exception->statusCode,
+                'message' => $message,
+                'success' => false,
+                'data' => []
+            ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
         );
     }
 }

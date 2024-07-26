@@ -7,7 +7,8 @@ use Webman\Http\Request;
 use Webman\Http\Response;
 use support\exception\Handler as ExceptionHandler;
 
-class Handler extends ExceptionHandler{
+class Handler extends ExceptionHandler
+{
     public $dontReport = [];
 
     public function report(Throwable $exception)
@@ -40,6 +41,15 @@ class Handler extends ExceptionHandler{
             return (new $handler($this->logger, $this->debug))->render($request, $exception);
         }
 
-        return parent::render($request, $exception);
+        return new Response(
+            200,
+            ['Content-Type' => 'application/json'],
+            json_encode([
+                'code' => $exception->code ?: 1,
+                'message' => $exception->getMessage(),
+                'success' => false,
+                'data' => []
+            ], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
+        );
     }
 }
