@@ -45,7 +45,7 @@ class Handler extends ExceptionHandler
             200,
             ['Content-Type' => 'application/json'],
             json_encode([
-                'code' => $exception->code ?: 1,
+                'code' => $exception->getCode() ?: 1,
                 'message' => $exception->getMessage(),
                 'success' => false,
                 'data' => []
