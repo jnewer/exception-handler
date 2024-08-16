@@ -21,7 +21,7 @@ class BaseExceptionHandler extends Handler
             $exception->statusCode,
             ['Content-Type' => 'application/json'],
             json_encode([
-                'code' => $exception->code ?: $exception->statusCode,
+                'code' => $exception->getCode() ?: $exception->statusCode,
                 'message' => $message,
                 'success' => false,
                 'data' => []
